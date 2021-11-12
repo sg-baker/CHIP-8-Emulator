@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
+// Using this library for temporary input
+#include <conio.h>
 
 // Constants
 #define STACK_MAX 256

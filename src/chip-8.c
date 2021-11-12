@@ -282,6 +282,30 @@ void emulate(Chip_8* chip) {
     case 0xE000:
         // TODO: implement 0xE000 instructions
 
+
+        /*
+        NOTE: This is a tenative solution until SDL or some other
+        input library can be implemented.
+        */
+
+        // Ex9E: skip one instruction if the key in vx is pressed
+        if ((chip->opcode & 0x00FF) == 0x009E) {
+            uint8_t key = chip->V[(chip->opcode & 0x0F00) >> 8] >> 4;
+            if ( _kbhit() && (atoi(getch()) == key)) {
+                chip->PC += 2;
+            }
+        }
+
+
+
+        // ExA1: skips one instruction if the key in vx is not pressed
+        if ((chip->opcode & 0x00FF) == 0x00A1) {
+            uint8_t key = chip->V[(chip->opcode & 0x0F00) >> 8] >> 4;
+            if ( _kbhit() && (atoi(getch()) != key)) {
+                chip->PC += 2;
+            }
+        }
+
         break;
     
     case 0xF000:
