@@ -64,6 +64,8 @@ void emulate(Chip_8* chip) {
     // witht the next two bytes, given us the full opcode
     chip->opcode = chip->RAM[chip->PC] << 8 | chip->RAM[chip->PC + 1];
 
+    printf("Current opcode: 0x%X:\n", chip->opcode);
+
     // Incrementing the PC
     chip->PC += 2;
 
@@ -545,6 +547,14 @@ void emulate(Chip_8* chip) {
         }
         chip->soundTimer--;
     }
+
+    // Debugging display
+    for (int i = 0; i < 16; i++) {
+        printf("V%d: %X\n", i, chip->V[i]);
+    }
+
+    printf("I: %X\n", chip->I);
+    printf("PC: %X\n", chip->PC);
 
     return;
 }
